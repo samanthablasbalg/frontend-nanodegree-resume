@@ -1,3 +1,10 @@
-/*
-This is empty on purpose! Your code to build the resume will go here.
- */
+$("#main").append(["Samantha Blasbalg"]);
+var awesomeThoughts = "I am Samantha and I am AWESOME";
+var funThoughts = awesomeThoughts.replace("AWESOME","FUN");
+$("#main").append(funThoughts);
+var name = "Samantha Blasbalg";
+var formattedName = HTMLheaderName.replace("%data%",name);
+var role = "Software Quality Engineer";
+var formattedRole = HTMLheaderRole.replace("%data%",role);
+$("#header").prepend(formattedRole);
+$("#header").prepend(formattedName);
