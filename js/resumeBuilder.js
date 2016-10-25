@@ -17,7 +17,7 @@ var education = {
 	"schools": [
 		{
 			"name": "University of Rhode Island",
-			"city": "Kingston, RI, US",
+			"location": "Kingston, RI, US",
 			"degree": "BS",
 			"major": "Communicative Disorders",
 			"minor": "Stage and Production Management",
@@ -25,7 +25,7 @@ var education = {
 		},
 		{
 			"name": "Boston University",
-			"city": "Boston, MA, US",
+			"location": "Boston, MA, US",
 			"degree": "MEng",
 			"major": "Biomedical Engineering",
 			"years": "2008-2014"
@@ -47,14 +47,14 @@ var work = {
 			"position": "Graphics Quality Engineer",
 			"employer": "MathWorks",
 			"years": "2014-present",
-			"city": "Natick, MA, US",
+			"location": "Natick, MA, US",
 			"description": "Putting some text in here that will be replaced later lalalala"
 		},
 		{
 			"position": "Graphics Quality Engineer Intern",
 			"employer": "MathWorks",
 			"years": "2014",
-			"city": "Natick, MA, US",
+			"location": "Natick, MA, US",
 			"description": "Putting some text in here that will be replaced later lalalala"
 		}		
 	]
@@ -63,13 +63,43 @@ var work = {
 var projects = {
 	"projects" : [
 		{
-			"title": "",
-			"dates": "",
-			"description": "",
-			"images": ""
+			"title": "foo",
+			"dates": "2014",
+			"description": "alalalala",
+			"images": "images/fry.jpg"
+		},
+		{
+			"title": "bar",
+			"dates": "2015",
+			"description": "alalalala",
+			"images": "images/fry.jpg"
+		},
+		{
+			"title": "baz",
+			"dates": "2016",
+			"description": "alalalala",
+			"images": "images/fry.jpg"
 		}
 	]
 };
+
+projects.display = function()
+{
+	for (var i = 0, len = projects.projects.length; i < len; i++) {
+		$("#projects").append(HTMLprojectStart);
+		var formattedTitle = HTMLprojectTitle.replace("%data%",projects.projects[i].title);
+		$(".project-entry:last").append(formattedTitle);
+		var formattedDates = HTMLprojectDates.replace("%data%",projects.projects[i].dates);
+		$(".project-entry:last").append(formattedDates);
+		var formattedDescription = HTMLprojectDescription.replace("%data%",projects.projects[i].description);
+		$(".project-entry:last").append(formattedDescription);
+		var formattedImage = HTMLprojectImage.replace("%data%",projects.projects[i].images);
+		$(".project-entry:last").append(formattedImage);
+
+	};
+};
+
+projects.display();
 
 var formattedName = HTMLheaderName.replace("%data%",bio.name);
 var formattedRole = HTMLheaderRole.replace("%data%",bio.role);
@@ -97,15 +127,31 @@ if (bio.skills.length > 0) {
 	};
 };
 
-for (var i = 0, len = work.jobs.length; i < len; i++) {
-	$("#workExperience").append(HTMLworkStart);
-	var formattedJob = HTMLworkEmployer.replace("%data%",work.jobs[i].employer);
-	var formattedTitle = HTMLworkTitle.replace("%data%",work.jobs[i].position);
-	$(".work-entry:last").append(formattedJob+formattedTitle);
-	var formattedDates = HTMLworkDates.replace("%data%",work.jobs[i].years);
-	$(".work-entry:last").append(formattedDates);
-	var formattedLocation = HTMLworkLocation.replace("%data%",work.jobs[i].city);
-	$(".work-entry:last").append(formattedLocation);
-	var formattedDescription = HTMLworkDescription.replace("%data%",work.jobs[i].description);
-	$(".work-entry:last").append(formattedDescription);
+function displayWork() {
+	for (var i = 0, len = work.jobs.length; i < len; i++) {
+		$("#workExperience").append(HTMLworkStart);
+		var formattedJob = HTMLworkEmployer.replace("%data%",work.jobs[i].employer);
+		var formattedTitle = HTMLworkTitle.replace("%data%",work.jobs[i].position);
+		$(".work-entry:last").append(formattedJob+formattedTitle);
+		var formattedDates = HTMLworkDates.replace("%data%",work.jobs[i].years);
+		$(".work-entry:last").append(formattedDates);
+		var formattedLocation = HTMLworkLocation.replace("%data%",work.jobs[i].city);
+		$(".work-entry:last").append(formattedLocation);
+		var formattedDescription = HTMLworkDescription.replace("%data%",work.jobs[i].description);
+		$(".work-entry:last").append(formattedDescription);
+	};
 };
+
+displayWork();
+
+$("#main").append(internationalizeButton);
+function inName(originalName)
+{
+	var names = originalName.split(" ");
+	var firstName = names[0].slice(0,1).toUpperCase() + names[0].slice(1).toLowerCase();
+	var lastName = names[1].toUpperCase();
+	var fullName = firstName + " " + lastName;
+	return fullName;
+};
+
+$("#mapDiv").append(googleMap);
