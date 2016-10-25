@@ -1,47 +1,16 @@
-var name = "Samantha Blasbalg";
-var formattedName = HTMLheaderName.replace("%data%",name);
-var role = "Software Quality Engineer";
-var formattedRole = HTMLheaderRole.replace("%data%",role);
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
-
-var work = {
-	"jobs" : [
-		{
-			"position" : "Graphics Quality Engineer",
-			"employer" : "MathWorks",
-			"years" : "2014-present",
-			"city" : "Natick, MA, US"
-		},
-		{
-			"position" : "Graphics Quality Engineer Intern",
-			"employer" : "MathWorks",
-			"years" : "2014",
-			"city" : "Natick, MA, US"
-		}		
-	]
-};
-
-var projects = {
-	"projects" : [
-		{
-
-		}
-	]
-};
-
 var bio = {
-	"name" : name,
-	"role" : role,
-	"contacts" : 
+	"name": "Samantha Blasbalg",
+	"role": "Software Quality Engineer",
+	"contacts": 
 	{
-		"mobile" : "401.743.6996",
-		"email" : "blasbalgs@gmail.com",
-		"github" : "samanthablasbalg"
-	}
-	"pictureURL" : "images/me.jpg",
-	"welcomeMessage" : "ALLOOO",
-	"skills" : ["being awesome","testing things","finding bugs"]
+		"mobile": "401.743.6996",
+		"email": "blasbalgs@gmail.com",
+		"github": "samanthablasbalg",
+		"location": "Cambridge, MA"
+	},
+	"pictureURL": "images/me.jpg",
+	"welcomeMessage": "ALLOOO",
+	"skills": ["being awesome","testing things","finding bugs"]
 };
 
 var education = {
@@ -61,14 +30,72 @@ var education = {
 			"major": "Biomedical Engineering",
 			"years": "2008-2014"
 		}
+	],
+	"onlineCourses": [
+		{
+			"title": "JavaScript Basics",
+			"school": "Udacity",
+			"dates": "2016",
+			"url": ""
+		}
+	] 
+};
+
+var work = {
+	"jobs" : [
+		{
+			"position": "Graphics Quality Engineer",
+			"employer": "MathWorks",
+			"years": "2014-present",
+			"city": "Natick, MA, US",
+			"description": "Putting some text in here that will be replaced later lalalala"
+		},
+		{
+			"position": "Graphics Quality Engineer Intern",
+			"employer": "MathWorks",
+			"years": "2014",
+			"city": "Natick, MA, US",
+			"description": "Putting some text in here that will be replaced later lalalala"
+		}		
 	]
 };
 
-// $("#main").append(bio.name);
-// $("#main").append(bio.role);
-// $("#main").append(bio.contactInfo);
-// $("#main").append(bio.pictureURL);
-// $("#main").append(bio.welcomeMessage);
-// $("#main").append(bio.skills);
-// $("#main").append(work["position"]);
-// $("#main").append(education.schools[1].name);
+var projects = {
+	"projects" : [
+		{
+			"title": "",
+			"dates": "",
+			"description": "",
+			"images": ""
+		}
+	]
+};
+
+var formattedName = HTMLheaderName.replace("%data%",bio.name);
+$("#header").prepend(formattedName);
+
+if (bio.skills.length > 0) {
+	$("#header").append(HTMLskillsStart);
+	var formattedSkill = HTMLskills.replace("%data%",bio.skills[0]);
+	$("#skills").append(formattedSkill);
+	formattedSkill = HTMLskills.replace("%data%",bio.skills[1]);
+	$("#skills").append(formattedSkill);
+	formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
+	$("#skills").append(formattedSkill);
+};
+
+for (job in work.jobs) {
+	if (work.jobs.hasOwnProperty(job))
+	{
+		$("#workExperience").append(HTMLworkStart);
+		var formattedJob = HTMLworkEmployer.replace("%data%",work.jobs[job].employer);
+		var formattedTitle = HTMLworkTitle.replace("%data%",work.jobs[job].position);
+		$(".work-entry:last").append(formattedJob+formattedTitle);
+		var formattedDates = HTMLworkDates.replace("%data%",work.jobs[job].years);
+		$(".work-entry:last").append(formattedDates);
+		var formattedLocation = HTMLworkLocation.replace("%data%",work.jobs[job].city);
+		$(".work-entry:last").append(formattedLocation);
+		var formattedDescription = HTMLworkDescription.replace("%data%",work.jobs[job].description);
+		$(".work-entry:last").append(formattedDescription);
+	};
+};
